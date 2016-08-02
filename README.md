@@ -5,8 +5,9 @@ This is a "ReactJS" demo
 * https://facebook.github.io/react/ 官方站点
 * http://reactjs.cn/react/ 中文站点
 * http://es6.ruanyifeng.com/ es2015
+* https://webpack.github.io/ webpack
 
-# Demo 1: product filter component
+# Day 1: product filter component
 Demo参考地址：https://facebook.github.io/react/docs/thinking-in-react.html
 
 1. 用户组件拆分规则：单一功能原则
@@ -28,3 +29,58 @@ Demo参考地址：https://facebook.github.io/react/docs/thinking-in-react.html
 > - 如果找不出拥有这个 state 数据模型的合适的组件，创建一个新的组件来维护这个 state ，然后添加到组件树中，层级位于所有共同拥有者组件的上面。
 
 6. 添加数据反馈：使用setState()更新state数据
+
+# Day 2: webpack工具搭建（1）
+1. 安装相关工具
+```
+npm install --save-dev webpack webpack-dev-server babel babel-cli babel-core babel-loader babel-preset-es2015 babel-preset-react
+```
+2. 创建配置文件 webpack.config.js
+```
+'use strict';
+
+module.exports = {
+  // 入口文件
+  entry: {
+    'index': './app/entry.js'
+  },
+  // 导出文件
+  output: {
+    path: './dist',
+    filename: 'bundle.js'
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+  // 调用模块
+  module: {
+    loaders: [{
+      test: /\.js|jsx?$/,
+      loader: 'babel-loader',
+      query: {
+        presets: ['es2015', 'react']
+      }
+    }]
+  }
+};
+```
+3. 修改component代码，改用es6语法
+```
+import React from 'react';
+
+class AppComponent extends React.Component {
+  render() {
+    return (
+      <div>This is App Component use es6<div/>
+    );
+  }
+}
+
+
+export default AppComponent;
+
+```
+4. 启用webpack，并监听文件更改
+```
+webpack --watch
+```
