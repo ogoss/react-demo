@@ -15,7 +15,7 @@ npm install
 ```
 * 创建配置文件
 webpack.config.js
-```
+```javascript
 'use strict';
 
 let webpack = require('webpack');
@@ -64,7 +64,7 @@ module.exports = {
 
 ```
 * 配置webpack-dev-server server.js
-```
+```javascript
 'use strict';
 
 let webpack = require('webpack');
@@ -88,7 +88,7 @@ new WebpackDevServer(webpack(config), {
 
 ```
 * 修改component代码，改用es6语法
-```
+```javascript
 import React from 'react';
 
 class AppComponent extends React.Component {
